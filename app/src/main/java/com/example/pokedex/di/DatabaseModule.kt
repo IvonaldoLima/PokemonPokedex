@@ -2,8 +2,7 @@ package com.example.pokedex.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.pokedex.data.databse.AppDatabase
-import com.example.pokedex.data.databse.LogDao
+import com.example.pokedex.data.local.AppDatabase
 import com.example.pokedex.data.local.PokemonDao
 import dagger.Module
 import dagger.Provides
@@ -24,11 +23,6 @@ object DatabaseModule {
                 AppDatabase::class.java,
                 "pokemon.db"
         ).build()
-    }
-
-    @Provides
-    fun provideLogDao(database: AppDatabase): LogDao {
-        return database.logDao()
     }
 
     @Provides

@@ -1,6 +1,6 @@
 package com.example.pokedex.di
 
-import com.example.pokedex.data.api.retrofit.PokemonApiService
+import com.example.pokedex.data.remote.PokemonApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +28,7 @@ object NetworkModule{
     ): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://demo1139027.mockable.io/")
+            .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
