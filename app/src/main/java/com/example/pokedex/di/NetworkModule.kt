@@ -28,6 +28,7 @@ object NetworkModule{
     ): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
+           // .baseUrl("http://demo1139027.mockable.io/")
             .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()

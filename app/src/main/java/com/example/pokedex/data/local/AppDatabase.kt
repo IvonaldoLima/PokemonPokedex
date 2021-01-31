@@ -2,9 +2,9 @@ package com.example.pokedex.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.pokedex.data.model.Pokemon
+import com.example.pokedex.data.model.PokemonDTO
 
-@Database(entities = [Pokemon::class], version = 1, exportSchema = false)
+@Database(entities = [PokemonDTO::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 }
