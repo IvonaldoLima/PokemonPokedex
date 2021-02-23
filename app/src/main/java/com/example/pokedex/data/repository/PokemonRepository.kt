@@ -1,17 +1,13 @@
 package com.example.pokedex.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.pokedex.data.remote.PokemonApiService
 import com.example.pokedex.data.local.PokemonDao
 import com.example.pokedex.data.model.PokemonDTO
 import com.example.pokedex.data.model.PokemonResourcePaged
-import com.example.pokedex.data.model.Pokemonm
 import com.example.pokedex.data.remote.PokemonRemoteDataSource
 import com.example.pokedex.util.Resource
 import com.example.pokedex.util.performGetOperation
-import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,16 +15,16 @@ import javax.inject.Singleton
 class PokemonRepository @Inject constructor(
         private val remoteDataSource: PokemonApiService,
         private val localDataSource: PokemonDao,
-        private val pokemonRemotoDataSource: PokemonRemoteDataSource
+        private val pokemonRemoteDataSource: PokemonRemoteDataSource
 ){
 
 
-    suspend fun mapearPokemonParaBaseDeDados(resource: Resource<PokemonResourcePaged>): List<PokemonDTO> {
+    private suspend fun mapearPokemonParaBaseDeDados(resource: Resource<PokemonResourcePaged>): List<PokemonDTO> {
 
         val pokemons: MutableList<PokemonDTO> = mutableListOf()
 
         resource.data?.results?.map {
-            pokemons.add(PokemonDTO(name = it.name))
+          //  pokemons.add(PokemonDTO(name = it.name, idPokemon = 20, urlImagePokemon = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/19.png"))
         }
         
         return pokemons
@@ -40,19 +36,13 @@ class PokemonRepository @Inject constructor(
 
     fun getPokemonsPaged(offset: Int = 10, limit: Int = 10) = performGetOperation(
             databaseQuery = { localDataSource.getAllPokemons() },
-            networkCall = { pokemonRemotoDataSource.getPokemonsPaged(10, 10) },
+            networkCall = { pokemonRemoteDataSource.getPokemonsPaged(10, 10) },
             mapData = { mapearPokemonParaBaseDeDados(it) },
             saveCallResult = { localDataSource.insertPokemonsPaged(it) }
     )
 
+    suspend fun getPokemonDetails(id: Int) = pokemonRemoteDataSource.getPokemon(id)
 
-    suspend fun insertPOkemon(){
-        localDataSource.insert(PokemonDTO(name = "Pokemon inserido"))
-    }
-
-    fun getPoksmonsFlow()  {
-
-    }
 }
 
 

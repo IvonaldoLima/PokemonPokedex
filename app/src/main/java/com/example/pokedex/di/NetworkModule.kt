@@ -1,6 +1,7 @@
 package com.example.pokedex.di
 
 import com.example.pokedex.data.remote.PokemonApiService
+import com.example.pokedex.data.remote.PokemonRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,6 @@ object NetworkModule{
     ): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-           // .baseUrl("http://demo1139027.mockable.io/")
             .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -36,4 +36,8 @@ object NetworkModule{
 
     @Provides
     fun providePokemonService(retrofit: Retrofit): PokemonApiService = retrofit.create(PokemonApiService::class.java)
+
+//    @Provides
+//    @Singleton
+//    fun pokemonRemoteDataSource(pokemonApiService: PokemonApiService): PokemonRemoteDataSource = PokemonRemoteDataSource(pokemonApiService)
 }

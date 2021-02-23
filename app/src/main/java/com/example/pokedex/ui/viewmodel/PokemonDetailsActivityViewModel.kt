@@ -1,16 +1,29 @@
 package com.example.pokedex.ui.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.pokedex.data.model.Pokemon
+import com.example.pokedex.data.repository.PokemonRepository
+import com.example.pokedex.util.Resource
+import dagger.hilt.android.scopes.ActivityScoped
+import kotlinx.coroutines.launch
 
-class PokemonDetailsActivityViewModel: ViewModel() {
+@ActivityScoped
+class PokemonDetailsActivityViewModel @ViewModelInject constructor(
+        private val repository: PokemonRepository
+    ): ViewModel() {
 
-    class PokemonDetailsActivityViewModelFactory(): ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(PokemonDetailsActivityViewModel::class.java)){
-                return PokemonDetailsActivityViewModel() as T
-            }
-            throw IllegalArgumentException("Unknown class name")
+
+    private val _pokemonLiveData = MutableLiveData<Resource<Pokemon>>()
+    val pokemonLiveData: LiveData<Resource<Pokemon>>
+        get() = _pokemonLiveData
+
+    fun getPokemonDetails(id: Int){
+        viewModelScope.launch{
+            _pokemonLiveData.value = repository.getPokemonDetails(id)
         }
     }
 }

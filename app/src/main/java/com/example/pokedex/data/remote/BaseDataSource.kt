@@ -24,4 +24,23 @@ open class BaseDataSource {
         return Resource.error("Network call has failed for a following reason: $message")
     }
 
+    suspend fun <T, R> getResultAndMap(
+            call: suspend () -> Response<T>,
+            map: suspend (T) -> R
+    ): Resource<R> {
+        try {
+            val response = call()
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null)
+                {
+                    val resourceMapped = map(body)
+                    return Resource.success(resourceMapped)
+                }
+            }
+            return error(" ${response.code()} ${response.message()}")
+        } catch (e: Exception) {
+            return error(e.message ?: e.toString())
+        }
+    }
 }
