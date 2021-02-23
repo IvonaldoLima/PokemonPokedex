@@ -65,10 +65,12 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_details_name" />
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_details_name"
+        app:layout_constraintVertical_bias="0.56" />
 
     <TextView
         android:id="@+id/pokemon_details_hp"
@@ -93,7 +95,7 @@
         android:visibility="visible"
         tools:layout_editor_absoluteX="108dp"
         tools:layout_editor_absoluteY="230dp"
-        tools:progress="60"/>
+        tools:progress="60" />
 
     <TextView
         android:id="@+id/pokemon_details_hp_value"
@@ -239,5 +241,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.120000005" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_weight"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="weight_value,weight"
+        app:flow_maxElementsWrap="1"
+        app:flow_verticalGap="5dp"
+        app:flow_wrapMode="aligned"
+        app:layout_constraintBottom_toBottomOf="@+id/flow_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/flow_height" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="height_value,height"
+        app:flow_maxElementsWrap="1"
+        app:flow_verticalGap="5dp"
+        app:flow_wrapMode="aligned"
+        app:layout_constraintEnd_toStartOf="@+id/flow_weight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_details_name" />
+
+    <TextView
+        android:id="@+id/height_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/height"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="402dp"
+        tools:text="50 KG" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flow_height"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/height_value"
+        tools:layout_editor_absoluteY="426dp" />
+
+    <TextView
+        android:id="@+id/weight_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="215dp"
+        tools:layout_editor_absoluteY="402dp"
+        tools:text="1.7 M" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flow_weight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/flow_weight"
+        tools:layout_editor_absoluteY="426dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

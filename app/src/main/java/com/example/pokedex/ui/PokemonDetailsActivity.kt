@@ -41,6 +41,8 @@ class PokemonDetailsActivity : AppCompatActivity() {
                         binding.pokemonDetailsDefValue.text = "$defense/300"
                         binding.pokemonsDetailsSpdProgressBar.setProgress(speed, true)
                         binding.pokemonDetailsSpdValue.text = "$speed/300"
+                        binding.heightValue.text = "$height M"
+                        binding.weightValue.text = "$weight KG"
                     }
                 }
                 ERROR -> {
